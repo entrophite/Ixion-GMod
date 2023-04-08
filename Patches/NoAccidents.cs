@@ -4,31 +4,76 @@ using HarmonyLib;
 
 namespace GMod.Patches;
 
-// ReSharper disable RedundantAssignment, UnusedMember.Global
 [HarmonyPatch]
-public class NoAccidents1 {
-    [HarmonyTargetMethod]
-    public static MethodBase TargetMethod() {
-        return typeof(CommandSectorAccidentManagement).GetMethod(nameof(CommandSectorAccidentManagement.BulwarkStudios_Stanford_Core_Commands_ICommandCustomTickable_OnCustomTick), BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
-    }
+public class NoAccidentsAtOptimalGauge
+{
+	[HarmonyTargetMethod]
+	public static MethodBase TargetMethod()
+	{
+		return typeof(CommandSectorAccidentManagement).GetMethod(nameof(CommandSectorAccidentManagement.BulwarkStudios_Stanford_Core_Commands_ICommandCustomTickable_OnCustomTick), BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+	}
 
-    [HarmonyPrefix]
-    public static bool Prefix(ref CommandSectorAccidentManagement __instance) {
-        __instance.ResetAccidentGauge();
-        return true;
-    }
+	[HarmonyPrefix]
+	public static bool Prefix(ref CommandSectorAccidentManagement __instance)
+	{
+		if (GMod.Plugin.configNoAccidents.Value)
+		{
+			__instance.ResetAccidentGauge();
+		}
+		return true;
+	}
 }
 
 [HarmonyPatch]
-public class NoAccidents2 {
-    [HarmonyTargetMethod]
-    public static MethodBase TargetMethod() {
-        return typeof(CommandSectorAccidentManagement).GetMethod(nameof(CommandSectorAccidentManagement.GetTremorChance), BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
-    }
+public class NoAccidentsAtOptimalTremor
+// by reverse engineering it seems that this chance is calcualted according to damage, the higher damage, higher chance of tremor (varying between 0%-50%)
+// but what is chance of tremor? the chance of fatalities?
+{
+	[HarmonyTargetMethod]
+	public static MethodBase TargetMethod()
+	{
+		return typeof(CommandSectorAccidentManagement).GetMethod(nameof(CommandSectorAccidentManagement.GetTremorChance), BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+	}
 
-    [HarmonyPrefix]
-    public static bool Prefix(ref float __result) {
-        __result = 0f;
-        return false;
-    }
+	[HarmonyPostfix]
+	public static void Postfix(ref CommandSectorAccidentManagement __instance, ref float __result)
+	{
+		if (GMod.Plugin.configNoAccidents.Value)
+			__result = 0f;
+	}
+}
+
+// below two mods disable accident effects completely; the accident events will
+// still be generated internally, but their effects and DLS notifications will
+// be killed before being applied
+[HarmonyPatch]
+public class NoAccidentsAllWorkingConditionsNotification
+{
+	[HarmonyTargetMethod]
+	public static MethodBase TargetMethod()
+	{
+		return typeof(CommandBuildingAccident).GetMethod(nameof(CommandBuildingAccident.BeforeSuccess), BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+	}
+
+	[HarmonyPrefix]
+	public static bool Prefix(ref CommandBuildingAccident __instance)
+	{
+		return !GMod.Plugin.configNoAccidents.Value;
+	}
+}
+
+[HarmonyPatch]
+public class NoAccidentsAllWorkingConditionsExecute
+{
+	[HarmonyTargetMethod]
+	public static MethodBase TargetMethod()
+	{
+		return typeof(CommandBuildingAccident).GetMethod(nameof(CommandBuildingAccident.OnStart), BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+	}
+
+	[HarmonyPrefix]
+	public static bool Prefix(ref CommandBuildingAccident __instance)
+	{
+		return !GMod.Plugin.configNoAccidents.Value;
+	}
 }

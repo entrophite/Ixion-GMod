@@ -1,0 +1,92 @@
+2023-03-19
+----------
+
+* Initial commit
+
+2023-03-24
+----------
+
+Tweaks added:
+
+* trust lock
+* no accidents under all working conditions
+* workshop building (and repair) speed
+* eva airlock building (and solar panel repair) speed
+* probe launcher & docking bay building speed
+* can remove resource refund when destroying building
+* probe scan range
+* remove inter-sector transporter number limit
+
+Tweaks modified:
+
+* nuclear power plant now requires no hydrogen for activation/working, but will still consume hydrogen if provided
+* removed technologies/updates dependency in addition to tier locks
+
+Tweaks removed:
+
+* disable routine accidents under optimal working condition (replaced by an enhanced tweak)
+
+Tweak configuration:
+
+* configurations are categorized
+* some configurations are renamed
+* configuration default values now set to NOT altering gameplay
+
+Misc:
+
+* updated readme
+
+Known issues:
+
+* probe scan range does not affect all the objects to reveal in the scanner UI
+
+
+2023-03-28
+----------
+0.0.2 pre-release
+
+
+2023-04-01
+----------
+
+Tweaks added:
+
+* hull degradation speed
+* factory production speed
+
+2023-04-02
+----------
+
+Tweaks added:
+
+* Storage capacity for Docking Bay
+* Force adding crews as workers
+
+Tweaks modified:
+
+* original storage works only with Stockpiles
+* stability lock can be tuned to a specified minimum level (used to be 0); renamed to 'MinStabilityLevelLock' from 'NoNegativeStability'
+
+Misc:
+
+* documentation change with respect to tweak changes
+
+2023-04-06
+----------
+
+Tweaks added:
+
+* Transporter movement speed
+
+Misc:
+
+* documentation change with respect to tweak changes
+
+Known issues:
+
+* transporter movement speed modifier doesn't reduce transporter spawning cooldown
+
+2023-04-08
+----------
+
+* 0.2 pre-release

@@ -14,44 +14,38 @@
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="BepInEx.IL2CPP" Version="6.0.0-be.557" IncludeAssets="compile"/>
-		<PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0"/>
-	</ItemGroup>
-	<ItemGroup>
-		<Reference Include="BepInEx">
-			<HintPath>C:\SteamLibrary\common\IXION\BepInEx\core\BepInEx.dll</HintPath>
-			<Private>false</Private>
+		<Reference Include="0Harmony">
+		  <HintPath>dependencies\0Harmony.dll</HintPath>
 		</Reference>
-		<Reference Include="BepInEx.Harmony">
-			<HintPath>C:\SteamLibrary\common\IXION\BepInEx\core\BepInEx.Harmony.dll</HintPath>
-			<Private>false</Private>
+		<Reference Include="BepInEx.Core">
+		  <HintPath>dependencies\BepInEx.Core.dll</HintPath>
 		</Reference>
-		<Reference Include="Assembly-CSharp">
-			<HintPath>C:\SteamLibrary\common\IXION\BepInEx\unhollowed\BulwarkStudios.Stanford.dll</HintPath>
-			<Private>false</Private>
+		<Reference Include="BepInEx.Unity.IL2CPP">
+		  <HintPath>dependencies\BepInEx.Unity.IL2CPP.dll</HintPath>
 		</Reference>
-		<Reference Include="Assembly-CSharp">
-			<HintPath>C:\SteamLibrary\common\IXION\BepInEx\unhollowed\Sirenix.Serialization.dll</HintPath>
-			<Private>false</Private>
+		<Reference Include="BulwarkStudios.Stanford">
+		  <HintPath>dependencies\BulwarkStudios.Stanford.dll</HintPath>
 		</Reference>
-		<Reference Include="Assembly-CSharp">
-			<HintPath>C:\SteamLibrary\common\IXION\BepInEx\unhollowed\Il2Cppmscorlib.dll</HintPath>
-			<Private>false</Private>
+		<Reference Include="Il2CppInterop.Runtime">
+		  <HintPath>dependencies\Il2CppInterop.Runtime.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2Cppmscorlib">
+		  <HintPath>dependencies\Il2Cppmscorlib.dll</HintPath>
+		</Reference>
+		<Reference Include="Sirenix.Serialization">
+		  <HintPath>dependencies\Sirenix.Serialization.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine">
-			<HintPath>C:\SteamLibrary\common\IXION\BepInEx\unhollowed\UnityEngine.dll</HintPath>
-			<Private>false</Private>
+		  <HintPath>dependencies\UnityEngine.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine.CoreModule">
-			<HintPath>C:\SteamLibrary\common\IXION\BepInEx\unhollowed\UnityEngine.CoreModule.dll</HintPath>
-			<Private>false</Private>
+		  <HintPath>dependencies\UnityEngine.CoreModule.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine.UI">
-			<HintPath>C:\SteamLibrary\common\IXION\BepInEx\unhollowed\UnityEngine.UI.dll</HintPath>
-			<Private>false</Private>
+		  <HintPath>dependencies\UnityEngine.UI.dll</HintPath>
 		</Reference>
 	</ItemGroup>
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;C:\SteamLibrary\common\IXION\BepInEx\plugins\&quot;&#xD;&#xA;copy &quot;$(TargetDir)$(TargetName).pdb&quot; &quot;C:\SteamLibrary\common\IXION\BepInEx\plugins\&quot;"/>
-	</Target>
+	<ItemGroup>
+	  <Folder Include="dependencies\" />
+	</ItemGroup>
 </Project>
