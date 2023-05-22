@@ -60,6 +60,11 @@ Tweaks can be disabled individually by configuration.
 Some tweaks can be used to make gameplay either easier or more challenging
 depending on the values are manipulated which way.
 
+## Recent updates
+
+* According to my own tests all tweaks function properly (at least in the challenge mode) after the recent difficulty update
+* The trust lock tweak failed to update the trust-meter; though it's just a visual effect, the internal trust value is updated as intended; a fix is planned at the moment
+
 
 ## Requirements:
 
